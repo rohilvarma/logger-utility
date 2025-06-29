@@ -16,7 +16,8 @@ class Logger:
         self.__log(Severity.ERROR, message, detailed_message)
 
     def debug(self, message: str, detailed_message: str = None) -> None:
-        self.__log(Severity.DEBUG, message, detailed_message)
+        if self.__config.debug:
+            self.__log(Severity.DEBUG, message, detailed_message)
 
     def success(self, message: str, detailed_message: str = None) -> None:
         self.__log(Severity.SUCCESS, message, detailed_message)

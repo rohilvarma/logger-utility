@@ -4,6 +4,7 @@ from logger_utility import LoggerConfig, Logger
 def main() -> None:
     # testing the logger
     config = LoggerConfig(
+        debug=False,
         log_output_path="/Users/rohilvarma/Desktop/Dev-Folder/lld-hands-on-projects/logger-utility/logs/test.log"
     )
     logger = Logger(config)
@@ -15,6 +16,7 @@ def main() -> None:
     logger.info(config)
     logger.warning("ASDFASDf", config)
     logger.error("ERR", "ASDF")
+    logger.success("Success!", "Testing success")
 
 if __name__ == "__main__":
     main()
