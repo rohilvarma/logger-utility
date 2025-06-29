@@ -14,8 +14,8 @@ This is division of different output writers is in accordance with
  - **DIP** - `logger.py` a high level component, close to the business logic is not dependent upon the low-level components that actually do the job, ie, `terminal.py` and `file.py`. But instead is dependent on the `config.py`. This dependency decouples the `logger.py` from the details of low level implementation and thus this separation of concerns implements DIP in logger utility. 
 
 ## ToDo
-- [ ] Add a ranking system in the severity of the logs
+- [X] Add a ranking system in the severity of the logs
 - [ ] Complete file writer
 - [ ] Test the logger class
-- [ ] Add docstrings for each function
+- [X] Add docstrings for each function
 - [ ] Create a how to use doc

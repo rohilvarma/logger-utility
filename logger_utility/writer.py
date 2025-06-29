@@ -2,6 +2,17 @@ from abc import ABC, abstractmethod
 
 
 class LogWriter(ABC):
+    """
+    Abstract base class for log writers.
+
+    Provides properties for debug mode, datetime format, and log format.
+    Subclasses must implement the write method to handle log output.
+
+    Attributes:
+        __debug_mode (bool): Enabl
+        __datetime_format (str): Format string for timestamps.
+        __log_format (str): Format string for log messages.
+    """
     def __init__(self):
         self.__debug_mode = False
         self.__datetime_format = "%Y-%m-%d %H:%M:%S"

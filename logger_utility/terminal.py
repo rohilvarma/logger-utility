@@ -1,37 +1,30 @@
 from datetime import datetime
 
-from .writer import LogWriter
-
+from logger_utility.writer import LogWriter
+from logger_utility.severity import Severity
 
 class TerminalWriter(LogWriter):
     def __init__(self):
         super().__init__()
-        self.__colors = {
-            "INFO": '\033[94m',
-            "WARNING": '\033[93m',
-            "ERROR": '\033[91m',
-            "RESET": '\033[0m',
-            "SUCCESS": '\033[92m',
-            "DEBUG": "\033[37m",
-        }
+        self.__RESET_COLOR = "\033[0m"
 
-    def write(self, severity: str, message: str, detailed_message: str = None) -> None:
+    def write(self, severity: Severity, message: str, detailed_message: str = None) -> None:
         try:
-            if severity not in self.__colors:
+            if severity not in Severity:
                 raise ValueError(
-                    f"Invalid severity requested: {severity}. Allowed severities are {list(self.__colors.keys())}"
+                    f"Invalid severity requested: {severity}."
                 )
 
             time = datetime.now().strftime(self.datetime_format)
-            formatted_string = self.log_format.format(time, severity, message)
+            formatted_string = self.log_format.format(time, severity.name, message)
 
             if detailed_message:
                 formatted_string += f" : {detailed_message}"
 
-            print(self.__colors[severity] + formatted_string + self.__colors["RESET"])
+            print(severity.value["color"] + formatted_string + self.__RESET_COLOR)
 
         except ValueError as e:
-            print(self.__colors["ERROR"] + str(e) + self.__colors["RESET"])
+            print(Severity.ERROR.value["color"] + str(e) + self.__RESET_COLOR)
 
 
 if __name__ == "__main__":

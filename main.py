@@ -12,7 +12,7 @@ def main() -> None:
     logger.warning("Warnig ")
     logger.info(config)
     logger.warning("ASDFASDf", config)
-    logger.error("ERR", a)
+    logger.error("ERR", "ASDF")
 
 if __name__ == "__main__":
     main()

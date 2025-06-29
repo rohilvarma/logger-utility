@@ -7,18 +7,21 @@ class Logger:
         self.__config = config
 
     def info(self, message: str, detailed_message: str = None) -> None:
-        self.__log("INFO", message, detailed_message)
+        self.__log(Severity.INFO, message, detailed_message)
 
     def warning(self, message: str, detailed_message: str = None) -> None:
-        self.__log("WARNING", message, detailed_message)
+        self.__log(Severity.WARNING, message, detailed_message)
 
     def error(self, message: str, detailed_message: str = None) -> None:
-        self.__log("ERROR", message, detailed_message)
+        self.__log(Severity.ERROR, message, detailed_message)
 
     def debug(self, message: str, detailed_message: str = None) -> None:
-        self.__log("DEBUG", message, detailed_message)
+        self.__log(Severity.DEBUG, message, detailed_message)
 
-    def __log(self, severity: str,  message: str, detailed_message: str = None) -> None:
+    def success(self, message: str, detailed_message: str = None) -> None:
+        self.__log(Severity.SUCCESS, message, detailed_message)
+
+    def __log(self, severity: Severity,  message: str, detailed_message: str = None) -> None:
         for w in self.__config.writers:
             w.write(severity, message, detailed_message)
 
