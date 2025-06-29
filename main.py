@@ -3,7 +3,9 @@ from logger_utility import LoggerConfig, Logger
 
 def main() -> None:
     # testing the logger
-    config = LoggerConfig()
+    config = LoggerConfig(
+        log_output_path="/Users/rohilvarma/Desktop/Dev-Folder/lld-hands-on-projects/logger-utility/logs/test.log"
+    )
     logger = Logger(config)
 
     logger.info("Test Message")

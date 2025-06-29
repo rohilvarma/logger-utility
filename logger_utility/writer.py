@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-
+from datetime import datetime
+from logger_utility.severity import Severity
 
 class LogWriter(ABC):
     """
@@ -39,8 +40,11 @@ class LogWriter(ABC):
         return self.__log_format
 
     @abstractmethod
-    def write(self, severity: str, message: str, detailed_message: str = None) -> None:
+    def write(self, severity: Severity, message: str, detailed_message: str = None) -> None:
         pass
+
+    def get_current_time(self) -> str:
+        return datetime.now().strftime(self.datetime_format)
 
 
 if __name__ == "__main__":

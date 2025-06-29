@@ -15,7 +15,7 @@ class TerminalWriter(LogWriter):
                     f"Invalid severity requested: {severity}."
                 )
 
-            time = datetime.now().strftime(self.datetime_format)
+            time = self.get_current_time()
             formatted_string = self.log_format.format(time, severity.name, message)
 
             if detailed_message:

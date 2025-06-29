@@ -1,5 +1,6 @@
 import os
 
+from logger_utility.severity import Severity
 from logger_utility.writer import LogWriter
 
 
@@ -25,9 +26,6 @@ class FileWriter(LogWriter):
 
         self.__file_open_mode = mode
 
-    def write(self, severity: str, message: str, detailed_message: str = None) -> None:
-        pass
-
     def __create_output_file(self) -> None:
         """
         Creates the output log file and its parent directories if they do not exist.
@@ -50,6 +48,25 @@ class FileWriter(LogWriter):
 
         except FileExistsError:
             raise FileExistsError(f"Log file: {self.__log_file_name} already exists.")
+
+    def write(self, severity: Severity, message: str, detailed_message: str = None) -> None:
+        time = self.get_current_time()
+        formatted_string = self.log_format.format(time, severity.name, message)
+        try:
+            if severity not in Severity:
+                raise ValueError(
+                    f"Invalid severity requested: {severity}."
+                )
+
+            if detailed_message:
+                formatted_string += f" : {detailed_message}"
+
+            with open(self.__path, self.file_open_mode) as f:
+                f.write(formatted_string + "\n")
+
+        except Exception as e:
+            print(Severity.ERROR.value["color"] + str(e) + "\033[0m")
+
 
 if __name__ == "__main__":
     fw = FileWriter()
