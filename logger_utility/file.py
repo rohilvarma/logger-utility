@@ -1,6 +1,6 @@
 import os
 
-from writer import LogWriter
+from .writer import LogWriter
 
 
 class FileWriter(LogWriter):

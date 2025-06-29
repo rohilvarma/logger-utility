@@ -1,10 +1,10 @@
-from terminal import TerminalWriter
-from file import FileWriter
-from writer import LogWriter
+from .file import FileWriter
+from .terminal import TerminalWriter
+from .writer import LogWriter
 
 
 class LoggerConfig:
-    def __init__(self, log_output_path: str = None, debug: bool = True, datetime_format: str = None):
+    def __init__(self, log_output_path: str = None, debug: bool = None, datetime_format: str = None):
         self.log_output_path = log_output_path
         self.debug = debug
         self.datetime_format = datetime_format
@@ -20,8 +20,8 @@ class LoggerConfig:
 
     def __update_writer_attributes(self) -> None:
         for w in self.writers:
-            w.debug_mode = self.debug
-            w.datetime_format = self.datetime_format
+            w.debug_mode = self.debug if self.debug is not None else w.debug_mode
+            w.datetime_format = self.datetime_format if self.datetime_format is not None else w.datetime_format
 
     def __str__(self) -> str:
         return f"LoggerConfig(log_output_path={self.log_output_path}, debug={self.debug}, writers={[type(w).__name__ for w in self.writers]})"

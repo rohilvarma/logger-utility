@@ -1,5 +1,6 @@
-from writer import LogWriter
 from datetime import datetime
+
+from .writer import LogWriter
 
 
 class TerminalWriter(LogWriter):
@@ -17,7 +18,9 @@ class TerminalWriter(LogWriter):
     def write(self, severity: str, message: str, detailed_message: str = None) -> None:
         try:
             if severity not in self.__colors:
-                raise ValueError(f"Invalid severity requested: {severity}. Allowed severities are {list(self.__colors.keys())}")
+                raise ValueError(
+                    f"Invalid severity requested: {severity}. Allowed severities are {list(self.__colors.keys())}"
+                )
 
             time = datetime.now().strftime(self.datetime_format)
             formatted_string = self.log_format.format(time, severity, message)

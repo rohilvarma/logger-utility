@@ -17,3 +17,5 @@ This is division of different output writers is in accordance with
 - [ ] Add a ranking system in the severity of the logs
 - [ ] Complete file writer
 - [ ] Test the logger class
+- [ ] Add docstrings for each function
+- [ ] Create a how to use doc
